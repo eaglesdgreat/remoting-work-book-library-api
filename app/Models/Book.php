@@ -9,7 +9,19 @@ class Book extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'title',
+        'subtitle',
+        'description',
+        'author_id',
+        'image_url',
+        'number_of_pages',
+        'publisher',
+        'published_date',
+        'language',
+        'ratings',
+        'book_url',
+    ];
 
     protected $casts = [
         'ratings' => 'array'

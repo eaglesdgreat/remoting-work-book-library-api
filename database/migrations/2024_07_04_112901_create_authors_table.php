@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('summary')->nullable();
             $table->string('about');
-            $table->date('dateBirthed')->nullable();
-            $table->date('dateDied')->nullable();
+            $table->date('date_birthed')->nullable();
+            $table->date('date_died')->nullable();
             $table->timestamps();
         });
     }

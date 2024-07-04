@@ -17,13 +17,13 @@ return new class extends Migration
             $table->string('subtitle')->nullable();
             $table->foreignId('author_id')->references('id')->on('authors');
             $table->char('description');
-            $table->string('imageUrl');
-            $table->integer('numberOfPages')->nullable();
+            $table->string('image_url');
+            $table->integer('number_of_pages')->nullable();
             $table->string('publisher');
-            $table->date('publishedDate');
+            $table->date('published_date');
             $table->string('language')->nullable();
             $table->jsonb('ratings')->nullable();
-            $table->string('bookUrl');
+            $table->string('book_url');
             $table->timestamps();
         });
     }
