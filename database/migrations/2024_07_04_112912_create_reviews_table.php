@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id')->unsigned(); // user that made the review
             $table->integer('book_id')->unsigned(); // book review is made on
-            $table->string('comment');
+            $table->text('comment');
             $table->timestamps();
         });
     }

@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('subtitle')->nullable();
-            $table->foreignId('author_id')->references('id')->on('authors');
-            $table->char('description');
+            $table->foreignId('author_id');
+            $table->text('description');
             $table->string('image_url');
             $table->integer('number_of_pages')->nullable();
             $table->string('publisher');
