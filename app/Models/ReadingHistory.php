@@ -12,6 +12,6 @@ class ReadingHistory extends Model
     protected $fillable = ['user_id', 'book_id', 'is_read'];
 
     public function user() {
-        $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 }

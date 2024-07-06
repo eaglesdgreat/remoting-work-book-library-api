@@ -28,10 +28,10 @@ class Book extends Model
     ];
 
     public function author() {
-        $this->belongsTo(Author::class);
+        return $this->belongsTo(Author::class);
     }
 
     public function reviews() {
-        $this->hasMany(Review::class);
+        return $this->hasMany(Review::class);
     }
 }

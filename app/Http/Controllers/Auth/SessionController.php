@@ -23,7 +23,8 @@ class SessionController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $user = $request->user();
+        $user = $request->user()->load(['reading_histories']); //Load the reading_histories relationship when returning user info
+
         abort_if(!$user, 401, 'Unauthorized');
 
         return (new UserResource($user))->additional([

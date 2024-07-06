@@ -46,10 +46,10 @@ class User extends Authenticatable
     ];
 
     public function reading_histories() {
-        $this->hasMany(ReadingHistory::class);
+        return $this->hasMany(ReadingHistory::class);
     }
 
     public function reviews() {
-        $this->hasMany(Review::class);
+        return $this->hasMany(Review::class);
     }
 }
