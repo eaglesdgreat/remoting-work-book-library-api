@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\SessionController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,4 +25,5 @@ Route::post('login', LoginController::class)->name('login');
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('session', SessionController::class)->name('session');
     Route::post('logout', LogoutController::class)->name('logout');
+    Route::apiResource('users', UserController::class);
 });
