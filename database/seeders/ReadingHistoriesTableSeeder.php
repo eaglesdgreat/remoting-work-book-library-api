@@ -13,6 +13,6 @@ class ReadingHistoriesTableSeeder extends Seeder
      */
     public function run(): void
     {
-        ReadingHistory::factory()->count(40)->create();
+        ReadingHistory::factory()->count(5)->create();
     }
 }
