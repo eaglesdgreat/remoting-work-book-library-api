@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\BookResource;
 
 class AuthorResource extends JsonResource
 {
@@ -21,7 +22,7 @@ class AuthorResource extends JsonResource
             'summary' => $this->summary,
             'date_birthed' => $this->date_birthed,
             'date_died' => $this->date_died,
-            // 'books' => PostResource::collection($this->whenLoaded('books')),
+            'books' => BookResource::collection($this->whenLoaded('books')),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

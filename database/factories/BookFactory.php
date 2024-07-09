@@ -19,16 +19,16 @@ class BookFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()-> sentence(10),
-            'subtitle' => fake()->sentence(20),
-            'description' => fake()->sentence(75),
+            'title' => fake()-> sentence(4),
+            'subtitle' => fake()->sentence(6),
+            'description' => fake()->sentence(15),
             'author_id' => Author::factory(),
             'image_url' => fake()->imageUrl(),
             'number_of_pages' => fake()->numberBetween(100, 1000),
             'publisher' => fake()->name(),
             'published_date' => fake()->date(),
             'language' => fake()->languageCode(),
-            'ratings' => fake()->numberBetween(1, 5),
+            'ratings' => range(1, 5),
             'book_url' => fake()->url(),
         ];
     }

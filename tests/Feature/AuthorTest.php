@@ -15,11 +15,14 @@ class AuthorTest extends TestCase
     {
         $user = User::findOrFail(1);
 
-        $response = $this->actingAs($user)->json('GET', route('authors.index'));
+        $response = $this->actingAs($user)->json('GET', route('authors.index', [
+            'first' => 20,
+            'page' => 1,
+        ]));
 
         $response->assertSuccessful();
         $response->assertStatus(200);
-        $response->assertJsonStructure(['data' => [['name', 'about']], 'status']);
+        $response->assertJsonStructure(['data' => [['name', 'about']], 'paginatorInfo', 'status']);
     }
 
     public function test_non_admin_user_cannot_view_all_authors_data(): void

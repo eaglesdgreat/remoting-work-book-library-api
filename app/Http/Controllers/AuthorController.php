@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Author;
 use App\Http\Resources\AuthorResource;
 use Illuminate\Http\Response;
+use App\Http\Controllers\Traits\PaginatedTrait;
 
 /**
  * @group Authors
@@ -14,8 +15,10 @@ use Illuminate\Http\Response;
  */
 class AuthorController extends Controller
 {
+    use PaginatedTrait;
+
     /**
-     * Display a listing of the resource.
+     * Display list of authors.
      *
      * @authenticated
      * @response {"data":[{"id":"5","name":"Felix","summary":"short word","about":"long word","date_birthed":"23/12/1876","date_died":"null"}]}
@@ -24,17 +27,16 @@ class AuthorController extends Controller
      */
     public function index(Request $request)
     {
-        $user = $request->user();
+        $limit = $request->first;
+        $page = $request->page ?? 1;
 
-        abort_if(!$user->hasRole('admin'), Response::HTTP_FORBIDDEN, 'Permission denial!');
+        abort_if(!$request->user()->hasRole('admin'), Response::HTTP_FORBIDDEN, 'Permission denial!');
 
-        return (AuthorResource::collection(Author::all()))->additional([
-            'status' => Response::HTTP_OK,
-        ]);
+        return $this->getPaginatedCollection(Author::select(), $limit, $page, null, null, [], []);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created author.
      *
      * @bodyParam name string required name.
      * @bodyParam about string required about.
