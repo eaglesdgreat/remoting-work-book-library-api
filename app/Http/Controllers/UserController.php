@@ -29,9 +29,7 @@ class UserController extends Controller
 
         abort_if(!$user->hasRole('admin'), 403, 'Permission denial!');
 
-        $users = User::all();
-
-        return UserResource::collection($users);
+        return UserResource::collection(User::all());
     }
 
     /**

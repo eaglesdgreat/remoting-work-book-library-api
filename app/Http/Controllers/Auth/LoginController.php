@@ -35,7 +35,7 @@ class LoginController extends Controller
      * @unauthenticated
      * @response {"data":{"name":"Gust Olson","email":"gschuster@example.com","username":"olson123"},"token":"1|b5liQC0bP33jtCddheSiVp3c6ZnbiddKvDf36AxI"}
      *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Response|\Illuminate\Http\JsonResponse
      *
      * @throws \Illuminate\Validation\ValidationException
      */

@@ -13,6 +13,13 @@ class UsersTableSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->count(7)->create();
+        User::factory()->count(7)->create()->each(function ($user) {
+            if ($user->id == 1) {
+                $user->update(['name' => 'admin', 'email' => 'admin@example.com']);
+                $user->assignRole('admin');
+            } else {
+                $user->assignRole('user');
+            }
+        });
     }
 }

@@ -42,16 +42,5 @@ class RolesAndPermissionsTableSeeder extends Seeder
         // user permission
         $role = Role::create(['name' => 'user'])
             ->givePermissionTo(['view.books', 'view.author', 'edit.user']);
-
-        // assign role to users
-        $users = User::all();
-
-        foreach($users as &$user) {
-            if ($user->id == 1) {
-                $user->assignRole('admin');
-            } else {
-                $user->assignRole('user');
-            }
-        }
     }
 }

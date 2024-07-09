@@ -27,6 +27,7 @@ class UserTest extends TestCase
 
         $response = $this->actingAs($user)->json('GET', route('users.index'));
 
+        $response->assertForbidden();
         $response->assertStatus(403);
     }
 
