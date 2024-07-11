@@ -20,8 +20,16 @@ class Book extends Model
         'publisher',
         'published_date',
         'language',
-        'ratings',
         'book_url',
+    ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'ratings',
     ];
 
     protected $casts = [
@@ -44,7 +52,7 @@ class Book extends Model
     protected function rating(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value, array $attributes) => collect($attributes['ratings'])->avg(),
+            get: fn (mixed $value, array $attributes) => collect($this->ratings)->avg(),
         );
     }
 }

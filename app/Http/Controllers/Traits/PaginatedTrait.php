@@ -9,13 +9,14 @@ use Illuminate\Http\Response;
 trait PaginatedTrait
 {
     public function getPaginatedCollection(
-        Builder $builder,
-        int $limit = 25,
-        int $page = 1,
+        ?Builder $builder,
         ?string $search,
         ?array $sort,
         ?array $filter,
-        ?array $searchFields
+        ?array $searchFields,
+        int $limit = 25,
+        int $page = 1,
+        array $append = []
     ) {
         if ($search !== null && $search != "") {
             foreach ($searchFields as $key => $searchField) {
@@ -39,8 +40,10 @@ trait PaginatedTrait
 
         $paginatorInfo = $builder->paginate($limit, ["*"], 'page', $page);
 
+        $builder = !empty($append) ? $builder->get()->append($append) : $builder->get();
+
         return [
-            'data' => $builder->get(),
+            'data' => $builder,
             'paginatorInfo' => [
                 'count' => $paginatorInfo->count(),
                 'currentPage' => $paginatorInfo->currentPage(),

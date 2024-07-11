@@ -27,12 +27,12 @@ class AuthorController extends Controller
      */
     public function index(Request $request)
     {
-        $limit = $request->first;
-        $page = $request->page ?? 1;
+        $limit = $request->has('first') ? $request->first : 10;
+        $page = $request->has('page') ? $request->page : 1;
 
         abort_if(!$request->user()->hasRole('admin'), Response::HTTP_FORBIDDEN, 'Permission denial!');
 
-        return $this->getPaginatedCollection(Author::select(), $limit, $page, null, null, [], []);
+        return $this->getPaginatedCollection(Author::select(), null, null, [], [], $limit, $page);
     }
 
     /**

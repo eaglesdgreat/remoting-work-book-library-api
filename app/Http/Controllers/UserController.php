@@ -7,6 +7,7 @@ use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use App\Models\User;
+use App\Http\Controllers\Traits\PaginatedTrait;
 
 /**
  * @group Users
@@ -15,6 +16,8 @@ use App\Models\User;
  */
 class UserController extends Controller
 {
+    use PaginatedTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -25,11 +28,14 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        $limit = $request->has('first') ? $request->first : 10;
+        $page = $request->has('page') ? $request->page : 1;
+
         $user = $request->user();
 
         abort_if(!$user->hasRole('admin'), 403, 'Permission denial!');
 
-        return UserResource::collection(User::all());
+        return $this->getPaginatedCollection(User::select(), null, null, [], [], $limit, $page);
     }
 
     /**

@@ -3,16 +3,15 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\File;
 
-class CreateBookRequest extends FormRequest
+class UpdateBookRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -26,16 +25,8 @@ class CreateBookRequest extends FormRequest
             'title' => 'required|string',
             'author_id' => 'required|integer|exists:authors,id',
             'description' => 'required|string',
-            'image' => [
-                'required',
-                File::image(),
-            ],
             'publisher' => 'required|string',
             'published_date' => 'required|date',
-            'book' => [
-                'required',
-                 File::types(['pdf']),
-            ],
         ];
     }
 }
