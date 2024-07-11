@@ -24,11 +24,11 @@ class Book extends Model
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * The attributes that should be guarded for serialization.
      *
      * @var array<int, string>
      */
-    protected $hidden = [
+    protected $guarded = [
         'ratings',
     ];
 
@@ -52,7 +52,7 @@ class Book extends Model
     protected function rating(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value, array $attributes) => collect($this->ratings)->avg(),
+            get: fn (mixed $value, array $attributes) => collect($this->ratings)->avg('rating'),
         );
     }
 }
