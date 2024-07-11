@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\AuthorResource;
 
 class BookResource extends JsonResource
 {
@@ -26,7 +27,7 @@ class BookResource extends JsonResource
             'language' => $this->language,
             'rating' => $this->rating,
             'book_url' => $this->book_url,
-            'author' => new BookResource($this->whenLoaded('author')),
+            'authors' => AuthorResource::collection($this->whenLoaded('authors')),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

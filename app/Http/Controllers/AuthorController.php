@@ -67,7 +67,7 @@ class AuthorController extends Controller
      *
      * @param Author $author
      *
-     * @unauthenticated
+     * @authenticated
      * @response {"data":{"name":"Gust Olson","about":"long word","summary":"null",date_birthed:"null",date_died:"null"}, "status":"200"}
      *
      * @return \Illuminate\Http\Response|\Illuminate\Http\JsonResponse

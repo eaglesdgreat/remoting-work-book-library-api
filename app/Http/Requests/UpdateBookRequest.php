@@ -11,7 +11,7 @@ class UpdateBookRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,7 +23,8 @@ class UpdateBookRequest extends FormRequest
     {
         return [
             'title' => 'required|string',
-            'author_id' => 'required|integer|exists:authors,id',
+            'author_ids' => 'required|array',
+            'author_ids.*' => 'exists:authors,id',
             'description' => 'required|string',
             'publisher' => 'required|string',
             'published_date' => 'required|date',

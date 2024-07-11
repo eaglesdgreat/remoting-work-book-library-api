@@ -24,7 +24,8 @@ class CreateBookRequest extends FormRequest
     {
         return [
             'title' => 'required|string',
-            'author_id' => 'required|integer|exists:authors,id',
+            'author_ids' => 'required|array',
+            'author_ids.*' => 'exists:authors,id',
             'description' => 'required|string',
             'image' => [
                 'required',

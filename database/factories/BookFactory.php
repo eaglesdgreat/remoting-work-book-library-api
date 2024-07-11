@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\{Author, Book};
+use App\Models\{Book};
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Book>
@@ -22,7 +22,6 @@ class BookFactory extends Factory
             'title' => fake()-> sentence(4),
             'subtitle' => fake()->sentence(6),
             'description' => fake()->sentence(15),
-            'author_id' => Author::factory(),
             'image_url' => fake()->imageUrl(),
             'number_of_pages' => fake()->numberBetween(100, 1000),
             'publisher' => fake()->name(),

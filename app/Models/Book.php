@@ -41,8 +41,8 @@ class Book extends Model
         'author_name',
     ];
 
-    public function author() {
-        return $this->belongsTo(Author::class);
+    public function authors() {
+        return $this->belongsToMany(Author::class);
     }
 
     public function reviews() {
