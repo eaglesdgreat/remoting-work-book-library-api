@@ -45,7 +45,7 @@ class AddBookRatingController extends Controller
         $book->save();
 
         return (new BookResource($book))->additional([
-            'status' => Response::HTTP_CREATED,
+            'status' => Response::HTTP_OK,
         ]);
     }
 }
