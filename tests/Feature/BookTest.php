@@ -335,9 +335,10 @@ class BookTest extends TestCase
         $response->assertStatus(204);
         $response->assertNoContent();
 
-        $this->assertDatabaseMissing('authors', [
+        $this->assertDatabaseMissing('books', [
             'id' => $book->id,
             'title' => $book->title,
+            'book_url' => $book->book_url,
         ]);
     }
 
