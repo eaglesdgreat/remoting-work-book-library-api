@@ -10,6 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\AddBookRatingController;
+use App\Http\Controllers\BookReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,4 +34,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('authors', AuthorController::class);
     Route::apiResource('books', BookController::class)->except(['index', 'show']);
     Route::post('books/ratings', AddBookRatingController::class)->name('rating');
+    Route::apiResource('reviews', BookReviewController::class);
 });

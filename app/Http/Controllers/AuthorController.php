@@ -98,14 +98,14 @@ class AuthorController extends Controller
      */
     public function update(Request $request, Author $author)
     {
+        abort_if(!$request->user()->hasRole('admin'), Response::HTTP_FORBIDDEN, 'Permission denial!');
+
         $request->validate([
             'name' => 'required',
             'about' => 'required',
         ]);
 
-        abort_if(!$request->user()->hasRole('admin'), Response::HTTP_FORBIDDEN, 'Permission denial!');
-
-        $author->update($request->all());
+        $author->update($request->safe()->all());
 
         return (new AuthorResource($author))->additional(([
             'status' => Response::HTTP_OK,

@@ -79,7 +79,7 @@ class BookController extends Controller
     public function show(Request $request, Book $book)
     {
         return (new BookResource($book->load('authors')))->additional([
-            'status' => Response::HTTP_CREATED,
+            'status' => Response::HTTP_OK,
         ]);
     }
 
@@ -107,10 +107,10 @@ class BookController extends Controller
     {
         abort_if(!$request->user()->hasRole('admin'), Response::HTTP_FORBIDDEN, 'Permission denial!');
 
-        $book->update($request->all());
+        $book->update($request->safe()->all());
 
         return (new BookResource($book->load('authors')))->additional([
-            'status' => Response::HTTP_CREATED,
+            'status' => Response::HTTP_OK,
         ]);
     }
 
