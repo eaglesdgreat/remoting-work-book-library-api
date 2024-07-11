@@ -38,7 +38,7 @@ class Book extends Model
 
     public static $searchable = [
         'title',
-        'author_name',
+        'name',
     ];
 
     public function authors() {

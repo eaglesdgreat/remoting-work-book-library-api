@@ -23,11 +23,12 @@ use App\Http\Controllers\BookController;
 
 Route::post('register', RegisterController::class)->name('register');
 Route::post('login', LoginController::class)->name('login');
+Route::apiResource('books', BookController::class)->except(['store', 'update', 'destroy']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('session', SessionController::class)->name('session');
     Route::post('logout', LogoutController::class)->name('logout');
     Route::apiResource('users', UserController::class)->except(['store', 'show', 'destroy']);
     Route::apiResource('authors', AuthorController::class);
-    Route::apiResource('books', BookController::class);
+    Route::apiResource('books', BookController::class)->except(['index', 'show']);
 });

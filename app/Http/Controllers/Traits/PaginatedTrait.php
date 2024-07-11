@@ -20,7 +20,9 @@ trait PaginatedTrait
     ) {
         if ($search !== null && $search != "") {
             foreach ($searchFields as $key => $searchField) {
-                $builder = ($key == 0) ? $builder->where($searchField, 'like', "%$search%") : $builder->orWhere($searchField, 'like', "%$search%", );
+                $builder = ($key == 0) ? $builder->where($searchField, 'like', "%$search%") : $builder->orWhereHas('authors', function($query) use ($searchField, $search) {
+                    $query->where($searchField, 'like', "%$search%");
+                });
             }
         }
 

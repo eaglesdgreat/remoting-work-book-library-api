@@ -30,8 +30,6 @@ class BookController extends Controller
         $search = $request->has('search') ? $request->search : null;
         $sort = $request->has('sort') && count($request->sort) > 0 ? $request->sort[0] : null;
 
-        abort_if(!$request->user()->hasAnyRole(['admin', 'user']), Response::HTTP_FORBIDDEN, 'Permission denial!');
-
         $searchFields = Book::$searchable;
         $queryBuilder = Book::with('authors:id,name,about');
 
@@ -80,8 +78,6 @@ class BookController extends Controller
      */
     public function show(Request $request, Book $book)
     {
-        abort_if(!$request->user()->hasAnyRole(['admin', 'user']), Response::HTTP_FORBIDDEN, 'Permission denial!');
-
         return (new BookResource($book->load('authors')))->additional([
             'status' => Response::HTTP_CREATED,
         ]);
@@ -113,7 +109,7 @@ class BookController extends Controller
 
         $book->update($request->all());
 
-        return (new BookResource($book))->additional([
+        return (new BookResource($book->load('authors')))->additional([
             'status' => Response::HTTP_CREATED,
         ]);
     }
@@ -139,7 +135,7 @@ class BookController extends Controller
     private function getBookAndImageUrl(CreateBookRequest $request)
     {
         try {
-            $bookData = $request->safe()->except(['book', 'image', 'author_ids']);
+            $bookData = $request->except(['book', 'image', 'author_ids']);
 
             $title = str_replace(' ', '-', $request->only('title')['title']);
             $imgPath = "images/{$title}.{$request->file('image')->getClientOriginalExtension()}";
