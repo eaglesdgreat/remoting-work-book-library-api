@@ -73,6 +73,8 @@ class ReadingHistoryController extends Controller
             'is_read' => 'required|boolean',
         ]);
 
+        abort_if($request->user()->id !== $reading_history->user_id, Response::HTTP_FORBIDDEN, 'Not allowed to modify this content');
+
         $reading_history->update($request->only('is_read'));
 
         return response("Book history updated to read.", Response::HTTP_OK);

@@ -151,7 +151,7 @@ class BookController extends Controller
 
             return $bookData;
         } catch(\Exception $e) {
-            throw $e;
+            throw $e->getMessage();
         }
     }
 }
