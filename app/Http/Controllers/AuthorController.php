@@ -105,7 +105,7 @@ class AuthorController extends Controller
             'about' => 'required',
         ]);
 
-        $author->update($request->safe()->all());
+        $author->update($request->all());
 
         return (new AuthorResource($author))->additional(([
             'status' => Response::HTTP_OK,

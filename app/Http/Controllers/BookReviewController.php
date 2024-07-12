@@ -56,9 +56,7 @@ class BookReviewController extends Controller
             'book_id' => 'required|int|exists:books,id',
         ]);
 
-        dd($request->safe()->all());
-
-        $review = Review::create($request->safe()->all());
+        $review = Review::create($request->all());
 
         return (new ReviewResource($review))->additional([
             'status' => Response::HTTP_CREATED,
@@ -106,7 +104,7 @@ class BookReviewController extends Controller
             'comment' => 'required|string',
         ]);
 
-        $review->update($request->safe()->all());
+        $review->update($request->only('comment'));
 
         return (new ReviewResource($review))->additional([
             'status' => Response::HTTP_OK,
@@ -115,10 +113,16 @@ class BookReviewController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     *
+     * @param Review $review
+     *
+     * @authenticated
+     *
+     * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request, Review $review)
     {
-        abort_if(!$request->user()->hasAnyRole(['admin', 'user']), Response::HTTP_FORBIDDEN, 'Permission denial!');
+        abort_if(!$request->user()->hasRole('admin'), Response::HTTP_FORBIDDEN, 'Permission denial!');
 
         $review->delete();
 

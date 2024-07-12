@@ -16,7 +16,7 @@ class AuthorTest extends TestCase
         $user = User::findOrFail(1);
 
         $response = $this->actingAs($user)->json('GET', route('authors.index', [
-            'first' => 20,
+            'first' => 3,
             'page' => 1,
         ]));
 

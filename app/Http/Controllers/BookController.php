@@ -76,7 +76,7 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response|\Illuminate\Http\JsonResponse
      */
-    public function show(Request $request, Book $book)
+    public function show(Book $book)
     {
         return (new BookResource($book->load('authors')))->additional([
             'status' => Response::HTTP_OK,
@@ -107,7 +107,7 @@ class BookController extends Controller
     {
         abort_if(!$request->user()->hasRole('admin'), Response::HTTP_FORBIDDEN, 'Permission denial!');
 
-        $book->update($request->safe()->all());
+        $book->update($request->all());
 
         return (new BookResource($book->load('authors')))->additional([
             'status' => Response::HTTP_OK,

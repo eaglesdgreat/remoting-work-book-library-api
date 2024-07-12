@@ -15,7 +15,7 @@ class BookTest extends TestCase
     public function test_user_can_view_all_books_data(): void
     {
         $response = $this->json('GET', route('books.index', [
-            'first' => 20,
+            'first' => 3,
             'page' => 1,
         ]));
 
@@ -345,6 +345,7 @@ class BookTest extends TestCase
     public function test_non_admin_user_cannot_delete_book_data(): void
     {
         $user = User::factory()->create();
+        $user->assignRole('user');
         $book = Book::factory()->create();
 
         $response = $this->actingAs($user)->json('DELETE', route('books.destroy', ['book' => $book->id]));
