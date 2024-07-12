@@ -49,6 +49,10 @@ class Book extends Model
         return $this->hasMany(Review::class);
     }
 
+    public function reading_histories() {
+        return $this->hasMany(ReadingHistory::class);
+    }
+
     protected function rating(): Attribute
     {
         return Attribute::make(

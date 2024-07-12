@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use App\Models\User;
 use App\Http\Controllers\Traits\PaginatedTrait;
+use Illuminate\Http\Response;
 
 /**
  * @group Users
@@ -86,7 +87,9 @@ class UserController extends Controller
             'username' => $data['username'],
         ]);
 
-        return (new UserResource($user));
+        return (new UserResource($user))->additional([
+            'status' => Response::HTTP_OK,
+        ]);
     }
 
     /**
