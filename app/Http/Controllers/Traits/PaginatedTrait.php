@@ -34,7 +34,17 @@ trait PaginatedTrait
             }
         }
 
-        $builder = (null !== $sort) ? $builder->orderBy($sort['column'], $sort['order']) : $builder->orderBy('created_at', 'desc');
+        if (null !== $sort) {
+            if ($sort['column'] === 'name') {
+                $builder = $builder->whereHas('authors', function($query) use ($sort) {
+                    $query->orderBy($sort['column'], $sort['order']);
+                });
+            } else {
+                $builder = $builder->orderBy($sort['column'], $sort['order']);
+            }
+        } else {
+            $builder = $builder->orderBy('created_at', 'desc');
+        }
 
         Paginator::currentPageResolver(function () use ($page) {
             return $page;
