@@ -12,7 +12,7 @@ trait PaginatedTrait
         ?Builder $builder,
         ?string $search,
         ?array $sort,
-        ?array $filter,
+        ?array $filters,
         ?array $searchFields,
         int $limit = 25,
         int $page = 1,
@@ -26,11 +26,9 @@ trait PaginatedTrait
             }
         }
 
-        if (!empty($filter)) {
-            $config = $filter[0];
-
-            foreach ($filter as $config) {
-                $builder = $builder->where($config['column'], $config['operator'], $config['value']);
+        if (!empty($filters)) {
+            foreach ($filters as $filter) {
+                $builder = $builder->where($filter['column'], $filter['operator'], $filter['value']);
             }
         }
 
