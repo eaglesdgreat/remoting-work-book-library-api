@@ -26,14 +26,14 @@ class BookController extends Controller
     {
         $limit = $request->has('first') ? $request->first : 10;
         $page = $request->has('page') ? $request->page : 1;
-        $filter = $request->has('filter') ? $request->filter : null;
+        $filters = $request->has('filter') ? $request->filter : null;
         $search = $request->has('search') ? $request->search : null;
         $sort = $request->has('sort') && count($request->sort) > 0 ? $request->sort[0] : null;
 
         $searchFields = Book::$searchable;
         $queryBuilder = Book::with('authors:id,name,about');
 
-        return $this->getPaginatedCollection($queryBuilder, $search, $sort, $filter, $searchFields, $limit, $page, ['rating']);
+        return $this->getPaginatedCollection($queryBuilder, $search, $sort, $filters, $searchFields, $limit, $page, ['rating']);
     }
 
     /**
